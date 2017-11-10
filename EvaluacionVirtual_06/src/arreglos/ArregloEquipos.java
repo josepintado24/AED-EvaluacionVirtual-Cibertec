@@ -1,4 +1,4 @@
-package gui;
+package arreglos;
 import java.util.ArrayList;
 
 import clases.Equipo;
