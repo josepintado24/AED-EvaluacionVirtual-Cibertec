@@ -9,16 +9,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import arreglos.ArregloEquipos;
+import clases.Equipo;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JFormattedTextField;
+import java.awt.event.KeyListener;
 
-public class Principal extends JFrame implements ActionListener {
+public class Principal extends JFrame implements ActionListener, KeyListener {
 
 	private JPanel contentPane;
 	private JTextField txtCodigo;
@@ -29,6 +33,7 @@ public class Principal extends JFrame implements ActionListener {
 	private JButton btnEliminarTodo;
 	private JButton btnEliminarPorCdigo;
 	private DefaultTableModel modelo;
+	private int codigocont=1;
 
 	/**
 	 * Launch the application.
@@ -41,6 +46,7 @@ public class Principal extends JFrame implements ActionListener {
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -57,7 +63,8 @@ public class Principal extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		txtCodigo = new JTextField();
+		txtCodigo = new JTextField(""+codigocont);
+		txtCodigo.addKeyListener(this);
 		txtCodigo.setBounds(31, 30, 86, 20);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
@@ -141,8 +148,12 @@ public class Principal extends JFrame implements ActionListener {
 		contentPane.add(btnCancelar);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(28, 61, 89, 23);
+		btnBuscar.setBounds(30, 66, 89, 23);
 		contentPane.add(btnBuscar);
+		
+		lblmensaje = new JLabel("");
+		lblmensaje.setBounds(141, 61, 296, 14);
+		contentPane.add(lblmensaje);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -176,6 +187,9 @@ public class Principal extends JFrame implements ActionListener {
 	private JButton btnGrabar;
 	private JButton btnCancelar;
 	private JButton btnBuscar;
+	private JLabel lblmensaje;
+	
+	/*Implemente el método listar que muestre los datos completos de cada equipo.*/
 	void listar(){
 		modelo.setRowCount(0);
 		
@@ -191,7 +205,38 @@ public class Principal extends JFrame implements ActionListener {
 		}
 		
 	}
+	/*Implemente la pulsación del botón Adicionar que envíe al método adicionar un nuevo equipo
+	 * creado, validando que el código no se repita.*/
+	private Integer leer(){
+		return Integer.parseInt(txtCodigo.getText());
+	}
+	  
 	protected void actionPerformedBtnAgregar(ActionEvent e) {
+		
+		
+		try{
+			if (ae.buscar(leer())==null){
+				String marca=txtMarca.getText();
+				double precio=Double.parseDouble(txtPrecio.getText());
+				int unidad=Integer.parseInt(txtUnidades.getText());
+				Equipo objetoEquipo=new Equipo(leer(),marca,precio,unidad);
+				ae.adicionar(objetoEquipo);
+				listar();
+				codigocont++;
+				txtCodigo.setText(""+codigocont);
+				
+			}
+			
+			else{
+				lblmensaje.setText("Codigo ya existe");
+			}
+			
+			
+		}
+		catch(Exception ag){
+			lblmensaje.setText("Ingrese datos correctos");
+		}
+		
 	}
 	protected void actionPerformedBtnEliminarPorCdigo(ActionEvent e) {
 	}
@@ -202,5 +247,12 @@ public class Principal extends JFrame implements ActionListener {
 	protected void actionPerformedBtnGrabar(ActionEvent e) {
 	}
 	protected void actionPerformedBtnCancelar(ActionEvent e) {
+	}
+	public void keyPressed(KeyEvent arg0) {
+	}
+	public void keyReleased(KeyEvent arg0) {
+	}
+	public void keyTyped(KeyEvent arg0) {
+		
 	}
 }
