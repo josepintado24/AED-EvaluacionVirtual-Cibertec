@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyListener;
 
@@ -111,12 +112,12 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		contentPane.add(txtMarca);
 		txtMarca.setColumns(10);
 		
-		txtPrecio = new JTextField();
+		txtPrecio = new JTextField("0");
 		txtPrecio.setBounds(238, 30, 86, 20);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
-		txtUnidades = new JTextField();
+		txtUnidades = new JTextField("0");
 		txtUnidades.setBounds(351, 30, 86, 20);
 		contentPane.add(txtUnidades);
 		txtUnidades.setColumns(10);
@@ -217,13 +218,32 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		try{
 			if (ae.buscar(leer())==null){
 				String marca=txtMarca.getText();
-				double precio=Double.parseDouble(txtPrecio.getText());
-				int unidad=Integer.parseInt(txtUnidades.getText());
-				Equipo objetoEquipo=new Equipo(leer(),marca,precio,unidad);
-				ae.adicionar(objetoEquipo);
-				listar();
-				codigocont++;
-				txtCodigo.setText(""+codigocont);
+				if(marca.length()!=0){
+					
+					if(txtPrecio.getText().length()!=0){
+						double precio=Double.parseDouble(txtPrecio.getText());
+						
+						if(txtUnidades.getText().length()!=0){
+							int unidad=Integer.parseInt(txtUnidades.getText());
+							Equipo objetoEquipo=new Equipo(leer(),marca,precio,unidad);
+							ae.adicionar(objetoEquipo);
+							listar();
+							codigocont++;
+							txtCodigo.setText(""+codigocont);
+						}
+						else{
+							lblmensaje.setText("Complete campo unidades");
+						}
+					}
+					else{
+						lblmensaje.setText("Complete campo precio");
+					}
+					
+				
+				}
+				else{
+					lblmensaje.setText("Complete campo Marca");
+				}
 				
 			}
 			
@@ -239,8 +259,36 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 	}
 	protected void actionPerformedBtnEliminarPorCdigo(ActionEvent e) {
+		//String mensaje=(""+ae.tamano());
+		//JOptionPane.showMessageDialog(this, ae.tamano());
 	}
+	/*mplemente la pulsación del botón Eliminar al final que elimine al último equipo.*/
 	protected void actionPerformedBtnEliminarFinal(ActionEvent e) {
+		try{
+			
+			
+				//JOptionPane.showConfirmDialog(null, "Realmente desea salir de Hola Swing?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if(JOptionPane.showConfirmDialog (null, new Object[]{"Elija una opcion"},"JOPtion", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+					if(ae.tamano()>0){
+						ae.eliminarAlFinal();
+						listar();
+					}
+					else{
+						lblmensaje.setText("ya no hay mas datos");
+					}
+				}
+				else{
+				 
+				}
+				
+			
+			
+		}
+		catch(Exception ag){
+			
+		}
+		
+		
 	}
 	protected void actionPerformedBtnEliminarTodo(ActionEvent e) {
 	}
