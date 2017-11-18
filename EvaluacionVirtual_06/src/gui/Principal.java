@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyListener;
+import javax.swing.ImageIcon;
 
 public class Principal extends JFrame implements ActionListener, KeyListener {
 
@@ -34,7 +35,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 	private JButton btnEliminarTodo;
 	private JButton btnEliminarPorCdigo;
 	private DefaultTableModel modelo;
-	private int codigocont=1;
+	private int codigocont=100;
 
 	/**
 	 * Launch the application.
@@ -139,7 +140,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		contentPane.add(lblCantidad);
 		
 		lblmensaje = new JLabel("");
-		lblmensaje.setBounds(141, 61, 296, 14);
+		lblmensaje.setBounds(210, 63, 296, 14);
 		contentPane.add(lblmensaje);
 	}
 
@@ -236,8 +237,13 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 	}
 	protected void actionPerformedBtnEliminarPorCdigo(ActionEvent e) {
-		//String mensaje=(""+ae.tamano());
-		//JOptionPane.showMessageDialog(this, ae.tamano());
+		if (ae.buscar(leer())!=null){
+			ae.eliminar(ae.buscar(leer()));
+			listar();
+		}
+		else {
+			lblmensaje.setText("No existe Codigo");
+		}
 	}
 	/*mplemente la pulsación del botón Eliminar al final que elimine al último equipo.*/
 	protected void actionPerformedBtnEliminarFinal(ActionEvent e) {
@@ -245,7 +251,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 			
 			
 				//JOptionPane.showConfirmDialog(null, "Realmente desea salir de Hola Swing?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if(JOptionPane.showConfirmDialog (null, new Object[]{"Elija una opcion"},"JOPtion", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
+				if(JOptionPane.showConfirmDialog (null, new Object[]{"¿Quieres eliminar?"},"ALERTA", JOptionPane.OK_CANCEL_OPTION)==JOptionPane.OK_OPTION){
 					if(ae.tamano()>0){
 						ae.eliminarAlFinal();
 						listar();
@@ -268,6 +274,9 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 	}
 	protected void actionPerformedBtnEliminarTodo(ActionEvent e) {
+		ae.eliminarTodo();
+		listar();
+		
 	}
 	public void keyPressed(KeyEvent arg0) {
 	}

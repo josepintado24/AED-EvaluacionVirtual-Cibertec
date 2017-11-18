@@ -47,7 +47,8 @@ public class ArregloEquipos {
 	}
 	
 	/*Método eliminar que reciba la DirMem de un objeto Equipo y lo retire del ArrayList.*/
-	public void eliminar(int eliminar){
+	public void eliminar(Equipo eliminar){
+		
 		equi.remove(eliminar);
 	}
 	
