@@ -72,7 +72,7 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(this);
-		btnAgregar.setBounds(602, 132, 89, 23);
+		btnAgregar.setBounds(451, 29, 89, 23);
 		contentPane.add(btnAgregar);
 		
 		scrollPane = new JScrollPane();
@@ -94,17 +94,17 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 		btnEliminarFinal = new JButton("Eliminar Final");
 		btnEliminarFinal.addActionListener(this);
-		btnEliminarFinal.setBounds(602, 192, 142, 23);
+		btnEliminarFinal.setBounds(590, 80, 142, 23);
 		contentPane.add(btnEliminarFinal);
 		
 		btnEliminarTodo = new JButton("Eliminar todo");
 		btnEliminarTodo.addActionListener(this);
-		btnEliminarTodo.setBounds(602, 226, 109, 23);
+		btnEliminarTodo.setBounds(590, 114, 142, 23);
 		contentPane.add(btnEliminarTodo);
 		
 		btnEliminarPorCdigo = new JButton("Eliminar por c\u00F3digo");
 		btnEliminarPorCdigo.addActionListener(this);
-		btnEliminarPorCdigo.setBounds(600, 166, 154, 23);
+		btnEliminarPorCdigo.setBounds(31, 61, 154, 23);
 		contentPane.add(btnEliminarPorCdigo);
 		
 		txtMarca = new JTextField();
@@ -138,32 +138,12 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		lblCantidad.setBounds(351, 5, 61, 14);
 		contentPane.add(lblCantidad);
 		
-		btnGrabar = new JButton("Grabar");
-		btnGrabar.addActionListener(this);
-		btnGrabar.setBounds(466, 5, 89, 23);
-		contentPane.add(btnGrabar);
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(this);
-		btnCancelar.setBounds(466, 66, 89, 23);
-		contentPane.add(btnCancelar);
-		
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(30, 66, 89, 23);
-		contentPane.add(btnBuscar);
-		
 		lblmensaje = new JLabel("");
 		lblmensaje.setBounds(141, 61, 296, 14);
 		contentPane.add(lblmensaje);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancelar) {
-			actionPerformedBtnCancelar(e);
-		}
-		if (e.getSource() == btnGrabar) {
-			actionPerformedBtnGrabar(e);
-		}
 		if (e.getSource() == btnEliminarTodo) {
 			actionPerformedBtnEliminarTodo(e);
 		}
@@ -185,9 +165,6 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 	private JLabel lblMarca;
 	private JLabel lblPrecio;
 	private JLabel lblCantidad;
-	private JButton btnGrabar;
-	private JButton btnCancelar;
-	private JButton btnBuscar;
 	private JLabel lblmensaje;
 	
 	/*Implemente el método listar que muestre los datos completos de cada equipo.*/
@@ -291,10 +268,6 @@ public class Principal extends JFrame implements ActionListener, KeyListener {
 		
 	}
 	protected void actionPerformedBtnEliminarTodo(ActionEvent e) {
-	}
-	protected void actionPerformedBtnGrabar(ActionEvent e) {
-	}
-	protected void actionPerformedBtnCancelar(ActionEvent e) {
 	}
 	public void keyPressed(KeyEvent arg0) {
 	}
